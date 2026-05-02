@@ -1,0 +1,591 @@
+@font-face {
+  font-family: 'MyFontLogo';
+  src: url('fonts/Bonheur_Royale/BonheurRoyale-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('fonts/FontName-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('fonts/FontName-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('fonts/FontName-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+.section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* NAV LINKS */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #8c8c8c;
+  padding: 5px 0;
+  display: inline-block;
+  /* important */
+}
+
+
+.logo {
+  font-family: 'MyFontLogo';
+  font-size: 4rem;
+  /* font-weight: bold; */
+  color: #ecd2a3;
+  text-decoration: none;
+
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #edc900;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+}
+
+/* Hover + active */
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 80%;
+}
+
+
+/* HOME SECTION */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out, transform 2.5s ease;
+}
+
+/* Text */
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2.5rem;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Shadow / light sweep */
+.hero-overlay {
+  position: absolute;
+  width: 250%;
+  height: 100%;
+  top: 0;
+  left: -150%;
+  z-index: 1;
+  background: linear-gradient(120deg,
+      rgb(0, 0, 0) 0%,
+      rgb(0, 0, 0) 25%,
+      rgba(255, 255, 255, 0.376) 45%,
+      rgba(255, 255, 255, 0) 50%,
+      /* 🔥 brightest point */
+      rgba(255, 255, 255, 0.399) 55%,
+      rgb(0, 0, 0) 75%,
+      rgb(0, 0, 0) 100%);
+
+  animation: flashlightSweep 12s linear infinite;
+}
+
+@keyframes flashlightSweep {
+  0% {
+    left: -150%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+.card-img-top {
+  height: 250px;
+  object-fit: cover;
+}
+
+.card-img-bottom {
+  width: 100%;
+  height: 278px;
+}
+
+
+.card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+
+
+/* ABOUT SECTION */
+.why-choose-us {
+  position: relative;
+  background-image: url("pictures/close-up-marble-textured-tiles.jpg");
+  background-repeat: repeat;
+  background-size: 500px;
+  /* adjust based on your tile */
+  background-position: center;
+  padding: 80px 0;
+}
+
+.why-choose-us::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.517);
+  /* dark overlay */
+}
+
+.why-choose-us .container {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.why-choose-us h5 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.why-choose-us p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.why-choose-us .col-md-3 {
+  transition: transform 0.3s ease;
+}
+
+.why-choose-us .col-md-3:hover {
+  transform: translateY(-5px);
+}
+
+
+/* SERVICE SECTION */
+
+.bathroom-tiling1 {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.process-section {
+  position: relative;
+  background-image: url("pictures/architectural-blueprints.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+/* Overlay for readability */
+.process-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 50, 0.531);
+  /* deep blueprint blue */
+}
+
+/* Keep content above overlay */
+.process-section .container {
+  position: relative;
+  z-index: 1;
+}
+
+.process-section h5 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.process-section p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+
+.process-section .col-md-3 {
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.process-section .col-md-3:last-child {
+  border-right: none;
+}
+
+
+
+/* Gallery Section */
+
+.gallery-img{
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+}
+
+
+.modal-body {
+  padding: 20px;
+}
+
+
+#lightboxImage {
+  transition: transform 0.3s ease;
+}
+
+#lightboxImage:hover {
+  transform: scale(1.02);
+}
+
+
+/* Fix modal width */
+.modal-dialog {
+  max-width: 800px;
+  /* you can adjust: 700px, 900px, etc */
+  /* max-height: 400px; */
+}
+
+/* Fix modal height and center content */
+.modal-body {
+  height: 500px;/* fixed height */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+.modal-img{
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+}
+.caption{
+  margin-top: 12px;
+  text-align: center;
+  max-width: 100%;
+}
+/* Make image fit inside without breaking */
+#lightboxImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+
+
+.kitchen-1 {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.stairs {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.tile-stairs2 {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.tile-design {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.repair-floor {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.kitchen6 {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.bathroom6 {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.floor-tiling {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+
+/* CONTACT SECTION */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.success-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+}
+
+.success-box {
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* SOCIAL MEDIA ICONS */
+.fb-logo {
+  width: 70px;
+  margin-top: 10px;
+}
+
+.gram-logo {
+  width: 70px;
+  margin-top: 10px;
+}
+
+
+.x-logo {
+  width: 70px;
+  margin-top: 10px;
+}
+
+.indeed-logo {
+  width: 70px;
+  margin-top: 10px;
+}
+
+
+.flex-social-media-icons {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+
+/* NAV LINKS */
+/* About Section with Parallax Effect */
+
+.about-parallax {
+  background-image: url('pictures/bathromm6.png');
+  min-height: 400px;
+
+  background-attachment: fixed;
+  /* parallax */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-parallax .content {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  border-radius: 10px;
+  color: white;
+}
+
+.btn-dark {
+  background-color: #c9a34e;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #a8832f;
+}
+
+
+
+
+
+
+/* FOOTER SESSION */
+
+footer {
+  position: relative;
+  background: url('pictures/tile-background.jpg') center/cover no-repeat;
+  overflow: hidden;
+}
+
+/* Dark overlay for readability */
+footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.577);
+}
+
+/* Keep your content above the overlay */
+footer>* {
+  position: relative;
+  z-index: 2;
+}
+
+.whatsApp-logo {
+  width: 80px;
+  margin-top: 10px;
+}
+
+footer p {
+  margin-bottom: 15px;
+}
+
+.flex-social-media-icons {
+  margin-top: 15px;
+  gap: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.flex-social-media-icons img {
+  width: 60px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.flex-social-media-icons img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+
+/* WHATSAPP BUTTON */
+.whatsapp-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  height: 60px;
+  /* match your image height */
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  z-index: 99999;
+}
+
+/* Image */
+.whatsApp-logo {
+  height: 100%;
+  width: auto;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+/* Expanding panel */
+.hover-panel {
+  position: absolute;
+  right: 12px;
+  top: 5px;
+  height: 100%;
+  width: 0;
+  background: #36b30d;
+  border-radius: 15px 0 0 15px;
+  /* curve on LEFT */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: width 0.4s ease;
+  z-index: 1;
+}
+
+/* Text */
+.label {
+  color: white;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.whatsapp-btn:hover .hover-panel {
+  width: 220px;
+}
+
+.whatsapp-btn:hover .label {
+  opacity: 1;
+  transform: translateX(0);
+}
