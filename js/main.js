@@ -1,52 +1,4 @@
 
-const sections = document.querySelectorAll(".section");
-
-window.addEventListener("scroll", () => {
-  sections.forEach(sec => {
-    const top = sec.getBoundingClientRect().top;
-
-    if (top < window.innerHeight - 100) {
-      sec.classList.add("show");
-    }
-  });
-});
-
-
-const hero = document.querySelector(".hero");
-
-const images = [
-  "pictures/3d-rendering-modern-black-bathroom-with-luxury-tile-decor.jpg",
-  "pictures/kitchen6.png",
-  "pictures/tile-stairs.png"
-];
-
-let index = 0;
-
-function changeImage() {
-  hero.style.backgroundImage = `url(${images[index]})`;
-
-  // zoom in
-  hero.style.transform = "scale(1.08)";
-
-  setTimeout(() => {
-    hero.style.transform = "scale(1)";
-  }, 2500);
-
-  index = (index + 1) % images.length;
-}
-
-// first image
-changeImage();
-
-// match shadow timing (5s)
-setInterval(changeImage, 5000);
-
-
-// Fade IN on page load
-window.addEventListener("load", () => {
-  document.body.classList.add("loaded");
-});
-
 
 function openLightbox(img) {
   document.getElementById("lightboxImage").src = img.src;
@@ -56,79 +8,103 @@ function openLightbox(img) {
 }
 
 
-// CONTACT FORM VALIDATION
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("contactForm");
+// // CONTACT FORM VALIDATION
+// ===== ELEMENTS =====
+const form = document.getElementById('contactForm');
+const nameInput = document.getElementById('name');
+const email = document.getElementById('email');
+const phone = document.getElementById('phone');
+const service = document.getElementById('service');
+const message = document.getElementById('message');
 
-  const name = document.getElementById("name");
-  const email = document.getElementById("email");
-  const phone = document.getElementById("phone");
-  const service = document.getElementById("service");
-  const message = document.getElementById("message");
+const popup = document.getElementById('successPopup');
+const closeBtn = document.getElementById('closePopup');
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    let errors = [];
-
-    // -------------------
-    // NAME validation
-    // -------------------
-    if (name.value.trim().length < 2) {
-      errors.push("Name must be at least 2 characters");
+// ===== VALIDATE FUNCTIONS =====
+function validate(input) {
+    if (!input.checkValidity()) {
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+        return false;
+    } else {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+        return true;
     }
-
-    // -------------------
-    // EMAIL validation
-    // -------------------
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email.value.trim())) {
-      errors.push("Enter a valid email address");
-    }
-
-    // -------------------
-    // PHONE validation (STRICT numbers only OR formatted allowed)
-    // -------------------
- const phoneValue = phone.value.trim();
-
-// STRICT: digits only, 7–15 numbers
-const phonePattern = /^[0-9]{7,15}$/;
-
-if (!phonePattern.test(phoneValue)) {
-  errors.push("Enter a valid phone number (digits only, 7–15 numbers)");
 }
 
-    // -------------------
-    // SERVICE validation
-    // -------------------
-    if (!service.value) {
-      errors.push("Please select a service");
+function validatePhone(input) {
+    const phonePattern = /^[0-9+\s()-]{7,15}$/;
+    if (!phonePattern.test(input.value.trim())) {
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+        return false;
+    } else {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+        return true;
     }
+}
 
-    // -------------------
-    // MESSAGE validation
-    // -------------------
-    if (message.value.trim().length < 5) {
-      errors.push("Message must be at least 5 characters");
+function validateSelect(select) {
+    if (!select.value) {
+        select.classList.add('is-invalid');
+        select.classList.remove('is-valid');
+        return false;
+    } else {
+        select.classList.remove('is-invalid');
+        select.classList.add('is-valid');
+        return true;
     }
+}
 
-    // -------------------
-    // RESULT HANDLING
-    // -------------------
-    if (errors.length > 0) {
-      alert(errors.join("\n"));
-      return;
-    }
-
-    // RESET FORM
-    form.reset();
-
-    // SHOW BOOTSTRAP MODAL
-    const modal = new bootstrap.Modal(document.getElementById("successModal"));
-    modal.show();
-  });
+// ===== LIVE VALIDATION =====
+[nameInput, email, message].forEach(input => {
+    input.addEventListener('input', () => validate(input));
 });
 
+phone.addEventListener('input', () => validatePhone(phone));
+service.addEventListener('change', () => validateSelect(service));
 
+// ===== FORM SUBMIT =====
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const isNameValid = validate(nameInput);
+    const isEmailValid = validate(email);
+    const isPhoneValid = validatePhone(phone);
+    const isServiceValid = validateSelect(service);
+    const isMessageValid = validate(message);
+    
+    if (isNameValid && isEmailValid && isPhoneValid && isServiceValid && isMessageValid) {
+        // Send to backend here with fetch()
+        console.log('Form valid. Submitting...');
+        
+        showPopup();
+        form.reset();
+        clearValidation();
+    }
+});
 
+// ===== CLEANUP =====
+function clearValidation() {
+    document.querySelectorAll('.is-invalid, .is-valid').forEach(el => {
+        el.classList.remove('is-invalid', 'is-valid');
+    });
+}
 
+// ===== POPUP CONTROLS =====
+function showPopup() {
+    popup.classList.remove('hidden');
+    closeBtn.focus();
+}
+
+closeBtn.addEventListener('click', () => {
+    popup.classList.add('hidden');
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !popup.classList.contains('hidden')) {
+        popup.classList.add('hidden');
+    }
+});
