@@ -26,6 +26,82 @@
   font-style: italic;
 }
 
+/* Remove Bootstrap's default border and background */
+.navbar-toggler {
+  border: none;
+  padding: 0;
+  width: 30px;
+  height: 24px;
+  position: relative;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none; /* removes blue outline on click */
+}
+
+/* Create 3 custom lines */
+.navbar-toggler-icon {
+  background-image: none !important; /* kill Bootstrap's SVG */
+  width: 100%;
+  height: 3px;
+  background: #fff;
+  display: block;
+  position: relative;
+  transition: 0.3s ease;
+  border-radius: 2px;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  transition: 0.3s ease;
+}
+
+.navbar-toggler-icon::before { top: -9px; }
+.navbar-toggler-icon::after { top: 9px; }
+
+/* When menu is open - turn into red X */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  background: transparent; /* middle line disappears */
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+  transform: rotate(45deg);
+  top: 0;
+  background: #e63946; /* red */
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+  transform: rotate(-45deg);
+  top: 0;
+  background: #e63946; /* red */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
