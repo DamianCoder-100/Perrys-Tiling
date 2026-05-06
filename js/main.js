@@ -79,7 +79,6 @@ form.addEventListener('submit', (e) => {
     if (isNameValid && isEmailValid && isPhoneValid && isServiceValid && isMessageValid) {
         // Send to backend here with fetch()
         console.log('Form valid. Submitting...');
-        
         showPopup();
         form.reset();
         clearValidation();
