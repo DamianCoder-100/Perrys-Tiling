@@ -83,30 +83,6 @@
   background: #e63946; /* red */
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 html {
   scroll-behavior: smooth;
 }
@@ -599,9 +575,6 @@ html {
   }
 }
 
-
-
-
 /* SOCIAL MEDIA ICONS */
 .fb-logo {
   width: 70px;
@@ -667,8 +640,6 @@ html {
 .btn-dark:hover {
   background-color: #a8832f;
 }
-
-
 
 /* FOOTER SESSION */
 footer {
@@ -798,8 +769,6 @@ footer p {
     /* full width looks better on mobile */
   }
 }
-
-
 
 @media (max-width: 827px) {
   .whatsapp-btn {
